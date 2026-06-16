@@ -1,0 +1,213 @@
+/* Page */
+.page {
+  min-height: calc(100vh - 72px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Back Link */
+.backLink {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  width: 100%;
+  max-width: 440px;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--accent-emerald);
+}
+
+/* Glassmorphism Form Card */
+.formCardWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin-top: 20px;
+}
+
+.formCardWrapper::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.5), rgba(37, 99, 235, 0.5));
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(8px);
+}
+
+.formCard {
+  background: color-mix(in srgb, var(--bg-card) 75%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .formCard {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 32px 20px;
+  }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Floating Label Inputs */
+.formGroup {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.floatingInput {
+  width: 100%;
+  padding: 20px 16px 8px;
+  border: none;
+  border-bottom: 2px solid var(--border);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: rgba(var(--bg-primary-rgb), 0.3);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.floatingInput:hover {
+  background: rgba(var(--bg-primary-rgb), 0.5);
+}
+
+.floatingInput:focus {
+  border-bottom-color: var(--accent-emerald);
+  background: rgba(var(--bg-primary-rgb), 0.8);
+}
+
+.floatingLabel {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floatingInput:focus ~ .floatingLabel,
+.floatingInput:not(:placeholder-shown) ~ .floatingLabel {
+  top: 6px;
+  font-size: 0.75rem;
+  color: var(--accent-emerald);
+  font-weight: 600;
+}
+
+.floatingInput::placeholder {
+  color: transparent; /* Hide placeholder so label handles it */
+}
+
+.errorText {
+  color: #EF4444;
+  font-size: 0.875rem;
+  margin-bottom: 24px;
+  text-align: center;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.submitBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #fff;
+  border: none;
+  padding: 16px 20px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+}
+
+.submitBtn:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+  transform: translateY(-2px);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.registerPrompt {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.registerLink {
+  color: var(--accent-emerald);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.registerLink:hover {
+  color: #047857;
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .registerLink:hover {
+  color: #10B981;
+}

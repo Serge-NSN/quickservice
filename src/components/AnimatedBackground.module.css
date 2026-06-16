@@ -1,0 +1,98 @@
+.container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.blob1 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.25), rgba(16, 185, 129, 0.15));
+  top: -15%;
+  right: -10%;
+  animation: float1 25s ease-in-out infinite alternate;
+}
+
+.blob2 {
+  width: 450px;
+  height: 450px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.15));
+  bottom: -15%;
+  left: -10%;
+  animation: float2 30s ease-in-out infinite alternate;
+}
+
+.blob3 {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(5, 150, 105, 0.12));
+  top: 35%;
+  left: 25%;
+  animation: float3 22s ease-in-out infinite alternate;
+}
+
+.blob4 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.1));
+  top: 15%;
+  right: 15%;
+  animation: float4 28s ease-in-out infinite alternate;
+}
+
+.blob5 {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(37, 99, 235, 0.12));
+  bottom: 20%;
+  right: 30%;
+  animation: float5 35s ease-in-out infinite alternate;
+}
+
+@keyframes float1 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(-100px, 80px) scale(1.15) rotate(10deg); }
+}
+
+@keyframes float2 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(80px, -100px) scale(1.2) rotate(-10deg); }
+}
+
+@keyframes float3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 60px) scale(0.85); }
+}
+
+@keyframes float4 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(-60px, -50px) scale(1.1) rotate(15deg); }
+}
+
+@keyframes float5 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(70px, -40px) scale(1.15); }
+}
+
+@media (max-width: 768px) {
+  .blob1 { width: 280px; height: 280px; }
+  .blob2 { width: 240px; height: 240px; }
+  .blob3 { width: 200px; height: 200px; }
+  .blob4 { width: 180px; height: 180px; }
+  .blob5 { width: 150px; height: 150px; }
+}

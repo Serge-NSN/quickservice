@@ -1,0 +1,15 @@
+.container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure the canvas is interactive but doesn't block underlying elements like clicks entirely. 
+Wait, if it's pointer-events: none, then mouse interactions won't work on the canvas! 
+We need the particles canvas to capture hover, but pass through clicks. 
+Actually, standard z-index: -1 usually works if it's part of the background, but pointer-events: auto on the canvas is needed. */
+.container :global(canvas) {
+  pointer-events: auto;
+}
