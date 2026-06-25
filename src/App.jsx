@@ -5,6 +5,9 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import ProviderProfile from './pages/ProviderProfile'
+import Support from './pages/Support'
+import AdminDashboard from './pages/AdminDashboard'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -25,6 +28,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/provider/:id" element={<ProviderProfile />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </div>
     </>

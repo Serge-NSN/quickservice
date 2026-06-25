@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../firebase/config';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase/config';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const navigate = useNavigate();
 
@@ -28,8 +30,16 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+          setIsAdmin(userDoc.exists() && userDoc.data().role === 'admin');
+        } catch { setIsAdmin(false); }
+      } else {
+        setIsAdmin(false);
+      }
     });
     return () => unsubscribe();
   }, []);
@@ -54,16 +64,14 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className={styles.desktopNav}>
-          <Link to="/" className={styles.navLink}>
-            Home
-          </Link>
-          <Link to="/" className={styles.navLink}>
-            Services
-          </Link>
+          <Link to="/" className={styles.navLink}>Home</Link>
+          <Link to="/" className={styles.navLink}>Services</Link>
+          <Link to="/support" className={styles.navLink}>Support</Link>
           {!user && (
-            <Link to="/register" className={styles.navLink}>
-              Become a Provider
-            </Link>
+            <Link to="/register" className={styles.navLink}>Become a Provider</Link>
+          )}
+          {isAdmin && (
+            <Link to="/admin" className={styles.navLink} style={{ color: 'var(--accent-emerald)', fontWeight: 700 }}>Admin</Link>
           )}
         </div>
 
@@ -171,12 +179,12 @@ const Navbar = () => {
           <button onClick={toggleTheme} className={styles.mobileNavLink} style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '8px' }}>
             {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
           </button>
-          <Link to="/" className={styles.mobileNavLink} onClick={closeMenu}>
-            Home
-          </Link>
-          <Link to="/" className={styles.mobileNavLink} onClick={closeMenu}>
-            Services
-          </Link>
+          <Link to="/" className={styles.mobileNavLink} onClick={closeMenu}>Home</Link>
+          <Link to="/" className={styles.mobileNavLink} onClick={closeMenu}>Services</Link>
+          <Link to="/support" className={styles.mobileNavLink} onClick={closeMenu}>Support</Link>
+          {isAdmin && (
+            <Link to="/admin" className={styles.mobileNavLink} onClick={closeMenu} style={{ color: 'var(--accent-emerald)', fontWeight: 700 }}>Admin Dashboard</Link>
+          )}
           
           {user ? (
             <button onClick={handleLogout} className={styles.mobileNavLink} style={{ textAlign: 'left' }}>

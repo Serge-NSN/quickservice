@@ -241,3 +241,23 @@
 .callButton:active {
   transform: translateY(0) scale(0.98);
 }
+
+.profileLink {
+  display: block;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.profileLink:hover {
+  color: var(--accent-emerald);
+  background: rgba(5, 150, 105, 0.06);
+  border-color: rgba(5, 150, 105, 0.15);
+}

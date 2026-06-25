@@ -41,6 +41,7 @@ export default function Footer() {
               <Link to="/" className={styles.link}>Home</Link>
               <Link to="/" className={styles.link}>Browse Services</Link>
               <Link to="/register" className={styles.link}>Become a Provider</Link>
+              <Link to="/support" className={styles.link}>Support & Help</Link>
             </nav>
           </div>
 
